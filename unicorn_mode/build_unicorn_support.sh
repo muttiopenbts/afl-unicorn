@@ -29,6 +29,7 @@
 
 UNICORN_URL="https://github.com/unicorn-engine/unicorn/archive/1.0.1.tar.gz"
 UNICORN_SHA384="489f2e8d18b6be01f2975f5128c290ca0c6aa3107ac317b9b549786a0946978469683e8fa8b6dfc502f6f71242279b47"
+USERNAME=root
 
 echo "================================================="
 echo "Unicorn-AFL build script"
@@ -136,7 +137,7 @@ fi
 echo "[*] Uncompressing archive (this will take a while)..."
 
 rm -rf "unicorn-1.0.1" || exit 1
-sudo -u ${USERNAME} tar xzf "$ARCHIVE" || exit 1
+sudo -u $USERNAME tar xzf "$ARCHIVE" || exit 1
 
 echo "[+] Unpacking successful."
 
@@ -144,9 +145,9 @@ rm -rf "$ARCHIVE" || exit 1
 
 echo "[*] Applying patches..."
 
-sudo -u ${USERNAME} patch -p0 <patches/config.diff || exit 1
-sudo -u ${USERNAME} patch -p0 <patches/cpu-exec.diff || exit 1
-sudo -u ${USERNAME} patch -p0 <patches/translate-all.diff || exit 1
+sudo -u $USERNAME patch -p0 <patches/config.diff || exit 1
+sudo -u $USERNAME patch -p0 <patches/cpu-exec.diff || exit 1
+sudo -u $USERNAME patch -p0 <patches/translate-all.diff || exit 1
 
 echo "[+] Patching done."
 
@@ -161,7 +162,7 @@ echo "[+] Configuration complete."
 
 echo "[*] Attempting to build Unicorn (fingers crossed!)..."
 
-sudo -u ${USERNAME} make || exit 1
+sudo -u $USERNAME make || exit 1
 
 echo "[+] Build process successful!"
 
